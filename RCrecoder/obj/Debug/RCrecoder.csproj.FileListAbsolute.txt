@@ -1,0 +1,12 @@
+C:\Users\eric.jw.yu\Desktop\RCrecoder\RCrecoder\bin\Debug\RCrecoder.exe.config
+C:\Users\eric.jw.yu\Desktop\RCrecoder\RCrecoder\bin\Debug\RCrecoder.exe
+C:\Users\eric.jw.yu\Desktop\RCrecoder\RCrecoder\bin\Debug\RCrecoder.pdb
+C:\Users\eric.jw.yu\Desktop\RCrecoder\RCrecoder\bin\Debug\MaterialSkin.dll
+C:\Users\eric.jw.yu\Desktop\RCrecoder\RCrecoder\bin\Debug\RedRat.dll
+C:\Users\eric.jw.yu\Desktop\RCrecoder\RCrecoder\obj\Debug\RCrecoder.RCrecoder.resources
+C:\Users\eric.jw.yu\Desktop\RCrecoder\RCrecoder\obj\Debug\RCrecoder.Properties.Resources.resources
+C:\Users\eric.jw.yu\Desktop\RCrecoder\RCrecoder\obj\Debug\RCrecoder.csproj.GenerateResource.Cache
+C:\Users\eric.jw.yu\Desktop\RCrecoder\RCrecoder\obj\Debug\RCrecoder.csproj.CoreCompileInputs.cache
+C:\Users\eric.jw.yu\Desktop\RCrecoder\RCrecoder\obj\Debug\RCrecoder.exe
+C:\Users\eric.jw.yu\Desktop\RCrecoder\RCrecoder\obj\Debug\RCrecoder.pdb
+C:\Users\eric.jw.yu\Desktop\RCrecoder\RCrecoder\obj\Debug\RCrecoder.csprojResolveAssemblyReference.cache

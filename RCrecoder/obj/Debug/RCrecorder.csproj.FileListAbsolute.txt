@@ -1,0 +1,17 @@
+C:\Users\eric.jw.yu\Desktop\RCrecoder\RCrecoder\bin\Debug\RCrecoder.exe.config
+C:\Users\eric.jw.yu\Desktop\RCrecoder\RCrecoder\bin\Debug\RCrecoder.exe
+C:\Users\eric.jw.yu\Desktop\RCrecoder\RCrecoder\bin\Debug\RCrecoder.pdb
+C:\Users\eric.jw.yu\Desktop\RCrecoder\RCrecoder\bin\Debug\MaterialSkin.dll
+C:\Users\eric.jw.yu\Desktop\RCrecoder\RCrecoder\bin\Debug\RedRat.dll
+C:\Users\eric.jw.yu\Desktop\RCrecoder\RCrecoder\obj\Debug\RCrecoder.Properties.Resources.resources
+C:\Users\eric.jw.yu\Desktop\RCrecoder\RCrecoder\obj\Debug\RCrecorder.csproj.GenerateResource.Cache
+C:\Users\eric.jw.yu\Desktop\RCrecoder\RCrecoder\obj\Debug\RCrecorder.csproj.CoreCompileInputs.cache
+C:\Users\eric.jw.yu\Desktop\RCrecoder\RCrecoder\obj\Debug\RCrecoder.exe
+C:\Users\eric.jw.yu\Desktop\RCrecoder\RCrecoder\obj\Debug\RCrecoder.pdb
+C:\Users\eric.jw.yu\Desktop\RCrecoder\RCrecoder\obj\Debug\RCrecoder.RCrecorderForm.resources
+C:\Users\eric.jw.yu\Desktop\RCrecoder\RCrecoder\bin\Debug\Microsoft.WindowsAPICodePack.Shell.dll
+C:\Users\eric.jw.yu\Desktop\RCrecoder\RCrecoder\obj\Debug\RCrecorder.csprojResolveAssemblyReference.cache
+C:\Users\eric.jw.yu\Desktop\RCrecoder\RCrecoder\bin\Debug\Microsoft.WindowsAPICodePack.dll
+C:\Users\eric.jw.yu\Desktop\RCrecoder\RCrecoder\bin\Debug\Microsoft.WindowsAPICodePack.ExtendedLinguisticServices.dll
+C:\Users\eric.jw.yu\Desktop\RCrecoder\RCrecoder\bin\Debug\Microsoft.WindowsAPICodePack.Sensors.dll
+C:\Users\eric.jw.yu\Desktop\RCrecoder\RCrecoder\bin\Debug\Microsoft.WindowsAPICodePack.ShellExtensions.dll
