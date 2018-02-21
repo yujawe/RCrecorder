@@ -45,10 +45,11 @@
             this.LoadDBButton1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.LoadDBButton1.AutoSize = true;
             this.LoadDBButton1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.LoadDBButton1.Depth = 0;
             this.LoadDBButton1.Font = new System.Drawing.Font("微軟正黑體", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.LoadDBButton1.Location = new System.Drawing.Point(13, 76);
+            this.LoadDBButton1.Location = new System.Drawing.Point(13, 108);
             this.LoadDBButton1.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
             this.LoadDBButton1.MouseState = MaterialSkin.MouseState.HOVER;
             this.LoadDBButton1.Name = "LoadDBButton1";
@@ -110,6 +111,7 @@
             // 
             // richTextBoxLineNumber
             // 
+            this.richTextBoxLineNumber.BackColor = System.Drawing.SystemColors.ScrollBar;
             this.richTextBoxLineNumber.Dock = System.Windows.Forms.DockStyle.Fill;
             this.richTextBoxLineNumber.Location = new System.Drawing.Point(0, 0);
             this.richTextBoxLineNumber.Name = "richTextBoxLineNumber";
@@ -120,7 +122,7 @@
             // 
             // splitContainer1
             // 
-            this.splitContainer1.Location = new System.Drawing.Point(287, 76);
+            this.splitContainer1.Location = new System.Drawing.Point(338, 110);
             this.splitContainer1.Name = "splitContainer1";
             // 
             // splitContainer1.Panel1
@@ -140,7 +142,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 18F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
-            this.ClientSize = new System.Drawing.Size(656, 452);
+            this.ClientSize = new System.Drawing.Size(680, 486);
             this.Controls.Add(this.splitContainer1);
             this.Controls.Add(this.RecorderendButton1);
             this.Controls.Add(this.RecorderStartButton2);

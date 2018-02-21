@@ -13,7 +13,7 @@ using RedRat;
 using RedRat.RedRat3;
 using RedRat.RedRat3.USB;
 using RedRat.AVDeviceMngmt;
-using Microsoft.WindowsAPICodePack.Dialogs;
+
 
 
 namespace RCrecoder
@@ -100,6 +100,9 @@ namespace RCrecoder
                     BeginInvoke((MethodInvoker)delegate
                     {
                         richTextBoxScript.Text += (sigKey.Signal.Name + "\n");
+                        richTextBoxScript.SelectionStart = richTextBoxScript.TextLength;
+                        // Scrolls the contents of the control to the current caret position.
+                        richTextBoxScript.ScrollToCaret();
                     });
                     signal_receive_Delay(200); //防止接收重複信號
                     redRat3.ClearRCSignalInQueue();
@@ -243,11 +246,6 @@ namespace RCrecoder
 
         private void richTextBoxScript_TextChanged(object sender, EventArgs e)
         {
-            richTextBoxScript.SelectionStart = richTextBoxScript.TextLength;
-            richTextBoxLineNumber.SelectionLength = richTextBoxLineNumber.TextLength;
-            // Scrolls the contents of the control to the current caret position.
-            richTextBoxScript.ScrollToCaret();
-            richTextBoxLineNumber.ScrollToCaret();
             AddLineNumbers();
         }
 
