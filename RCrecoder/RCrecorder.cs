@@ -180,10 +180,13 @@ namespace RCrecoder
             this.Text = "Finish !";
             redRat3.Disconnect();
             SaveFileDialog dlg = new SaveFileDialog();
-            dlg.Title = "Save an Script File";
+            dlg.Title = "Save an macro File";
             if (dlg.ShowDialog() == System.Windows.Forms.DialogResult.OK && dlg.FileName != "")
             {
-                RCscript = new StreamWriter(dlg.FileName + (".rcmacro"), false, System.Text.Encoding.Default);
+                if(File.Exists(dlg.FileName))
+                RCscript = new StreamWriter(dlg.FileName , true, System.Text.Encoding.Default);
+                else
+                RCscript = new StreamWriter(dlg.FileName + (".rcmacro"), true, System.Text.Encoding.Default);
             }
             RCscript.Write(richTextBoxScript.Text);
             RCscript.Close();
@@ -278,6 +281,30 @@ namespace RCrecoder
         private void splitContainer1_Panel1_Paint(object sender, PaintEventArgs e)
         {
 
+        }
+
+        private void loadmacroFlatButton_Click(object sender, EventArgs e)
+        {
+            richTextBoxScript.Clear();
+            RecorderendButton1.Enabled = true;
+
+            var openFileDialog = new OpenFileDialog
+            {
+                Filter = "rcmacro files (*.rcmacro)|*.rcmacro|All files (*.*)|*.*",
+                RestoreDirectory = true
+            };
+
+            if (openFileDialog.ShowDialog() != DialogResult.OK) return;
+
+            var fName = openFileDialog.FileName;
+            try
+            {
+                richTextBoxScript.Text =  File.ReadAllText(fName);             
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+            }
         }
     }
 }

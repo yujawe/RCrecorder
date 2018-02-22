@@ -34,6 +34,7 @@
             this.richTextBoxScript = new System.Windows.Forms.RichTextBox();
             this.richTextBoxLineNumber = new System.Windows.Forms.RichTextBox();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
+            this.loadmacroFlatButton = new MaterialSkin.Controls.MaterialFlatButton();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -139,12 +140,29 @@
             this.splitContainer1.SplitterDistance = 83;
             this.splitContainer1.TabIndex = 7;
             // 
+            // loadmacroFlatButton
+            // 
+            this.loadmacroFlatButton.AutoSize = true;
+            this.loadmacroFlatButton.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.loadmacroFlatButton.Depth = 0;
+            this.loadmacroFlatButton.Location = new System.Drawing.Point(13, 169);
+            this.loadmacroFlatButton.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            this.loadmacroFlatButton.MouseState = MaterialSkin.MouseState.HOVER;
+            this.loadmacroFlatButton.Name = "loadmacroFlatButton";
+            this.loadmacroFlatButton.Primary = false;
+            this.loadmacroFlatButton.Size = new System.Drawing.Size(144, 36);
+            this.loadmacroFlatButton.TabIndex = 8;
+            this.loadmacroFlatButton.Text = "LOAD MACRO";
+            this.loadmacroFlatButton.UseVisualStyleBackColor = true;
+            this.loadmacroFlatButton.Click += new System.EventHandler(this.loadmacroFlatButton_Click);
+            // 
             // RCrecorderForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 18F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
             this.ClientSize = new System.Drawing.Size(680, 486);
+            this.Controls.Add(this.loadmacroFlatButton);
             this.Controls.Add(this.splitContainer1);
             this.Controls.Add(this.RecorderendButton1);
             this.Controls.Add(this.RecorderStartButton2);
@@ -169,6 +187,7 @@
         private System.Windows.Forms.RichTextBox richTextBoxScript;
         private System.Windows.Forms.RichTextBox richTextBoxLineNumber;
         private System.Windows.Forms.SplitContainer splitContainer1;
+        private MaterialSkin.Controls.MaterialFlatButton loadmacroFlatButton;
     }
 }
 
