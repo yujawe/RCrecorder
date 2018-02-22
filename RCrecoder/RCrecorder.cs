@@ -82,13 +82,8 @@ namespace RCrecoder
             redRat3.RCDetectorEnabled = true;
             redRat3.Connect();
             this.Text = "Recording.....";
-            SaveFileDialog dlg = new SaveFileDialog();
-            dlg.Title = "Save an Script File";
-            if (dlg.ShowDialog() == System.Windows.Forms.DialogResult.OK && dlg.FileName != "")
-            {
-                RCscript = new StreamWriter(dlg.FileName + (".tpvts"), false, System.Text.Encoding.Default);
-            }
-            }
+            richTextBoxScript.Clear();
+        }
         protected void signal_decode(SignalKey sigKey)
         {
             if (sigKey.Signal != null)
@@ -158,7 +153,7 @@ namespace RCrecoder
                 }
                 else
                 {
-                    MessageBox.Show("No RedRat3 devices found.", "TestRemote Warning",
+                    MessageBox.Show("No RedRat3 devices found.", "Warning",
                       MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 }
 
@@ -184,8 +179,16 @@ namespace RCrecoder
         {
             this.Text = "Finish !";
             redRat3.Disconnect();
+            SaveFileDialog dlg = new SaveFileDialog();
+            dlg.Title = "Save an Script File";
+            if (dlg.ShowDialog() == System.Windows.Forms.DialogResult.OK && dlg.FileName != "")
+            {
+                RCscript = new StreamWriter(dlg.FileName + (".rcmacro"), false, System.Text.Encoding.Default);
+            }
             RCscript.Write(richTextBoxScript.Text);
             RCscript.Close();
+            RecorderendButton1.Enabled = false;
+            RecorderStartButton2.Enabled = true;
         }
 
         static bool BlueRatDevViewer_Delay_TimeOutIndicator = false;

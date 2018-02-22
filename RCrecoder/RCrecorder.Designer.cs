@@ -98,6 +98,7 @@
             // 
             this.richTextBoxScript.BackColor = System.Drawing.Color.Black;
             this.richTextBoxScript.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.richTextBoxScript.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.richTextBoxScript.ForeColor = System.Drawing.Color.Lime;
             this.richTextBoxScript.Location = new System.Drawing.Point(0, 0);
             this.richTextBoxScript.Name = "richTextBoxScript";
@@ -113,6 +114,7 @@
             // 
             this.richTextBoxLineNumber.BackColor = System.Drawing.SystemColors.ScrollBar;
             this.richTextBoxLineNumber.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.richTextBoxLineNumber.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.richTextBoxLineNumber.Location = new System.Drawing.Point(0, 0);
             this.richTextBoxLineNumber.Name = "richTextBoxLineNumber";
             this.richTextBoxLineNumber.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.None;
