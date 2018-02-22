@@ -56,7 +56,7 @@ namespace RCrecoder
                 fs = new FileStream((new FileInfo(fName)).FullName, FileMode.Open);
                 var newAVDeviceDB = (AVDeviceDB)ser.Deserialize(fs);
                 avDeviceDB = newAVDeviceDB;
-                Text = "";
+                Text = "READY!";
             }
             catch (Exception ex)
             {
@@ -99,7 +99,7 @@ namespace RCrecoder
                         // Scrolls the contents of the control to the current caret position.
                         richTextBoxScript.ScrollToCaret();
                     });
-                    signal_receive_Delay(200); //防止接收重複信號
+                    signal_receive_Delay(Convert.ToInt32(redRat3.EndOfSignalTimeout)); //防止接收重複信號
                     redRat3.ClearRCSignalInQueue();
                 }
                 redRat3.RCDetectorEnabled = true;
@@ -178,6 +178,7 @@ namespace RCrecoder
         private void RecorderendButton1_Click(object sender, EventArgs e)
         {
             this.Text = "Finish !";
+            if (redRat3 != null && redRat3.IsConnected())
             redRat3.Disconnect();
             SaveFileDialog dlg = new SaveFileDialog();
             dlg.Title = "Save an macro File";
@@ -187,9 +188,9 @@ namespace RCrecoder
                 RCscript = new StreamWriter(dlg.FileName , true, System.Text.Encoding.Default);
                 else
                 RCscript = new StreamWriter(dlg.FileName + (".rcmacro"), true, System.Text.Encoding.Default);
+                RCscript.Write(richTextBoxScript.Text);
+                RCscript.Close();
             }
-            RCscript.Write(richTextBoxScript.Text);
-            RCscript.Close();
             RecorderendButton1.Enabled = false;
             RecorderStartButton2.Enabled = true;
         }
@@ -285,8 +286,7 @@ namespace RCrecoder
 
         private void loadmacroFlatButton_Click(object sender, EventArgs e)
         {
-            richTextBoxScript.Clear();
-            RecorderendButton1.Enabled = true;
+ 
 
             var openFileDialog = new OpenFileDialog
             {
@@ -299,6 +299,8 @@ namespace RCrecoder
             var fName = openFileDialog.FileName;
             try
             {
+                RecorderendButton1.Enabled = true;
+                richTextBoxScript.Clear();
                 richTextBoxScript.Text =  File.ReadAllText(fName);             
             }
             catch (Exception ex)
