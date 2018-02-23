@@ -24,6 +24,7 @@ namespace RCrecoder
         protected IRedRat3 redRat3;
         List<string> all_button_name = new List<string>();
         StreamWriter RCscript;
+        System.Diagnostics.Stopwatch sw = new System.Diagnostics.Stopwatch();
 
         public RCrecorderForm()
         {
@@ -33,7 +34,6 @@ namespace RCrecoder
             {
                 // Add listener for incoming signals.
                 redRat3.RCDetectorSignalIn += RCSignalDataIn;
-                redRat3.RCDetectorEnabled = true;
             }
         }
 
@@ -56,7 +56,7 @@ namespace RCrecoder
                 fs = new FileStream((new FileInfo(fName)).FullName, FileMode.Open);
                 var newAVDeviceDB = (AVDeviceDB)ser.Deserialize(fs);
                 avDeviceDB = newAVDeviceDB;
-                Text = "READY!";
+                Text = avDeviceDB.AVDevices[0].Name + " READY!";
             }
             catch (Exception ex)
             {
@@ -83,6 +83,7 @@ namespace RCrecoder
             redRat3.Connect();
             this.Text = "Recording.....";
             richTextBoxScript.Clear();
+            sw.Restart();
         }
         protected void signal_decode(SignalKey sigKey)
         {
@@ -94,7 +95,8 @@ namespace RCrecoder
                 {
                     BeginInvoke((MethodInvoker)delegate
                     {
-                        richTextBoxScript.Text += (sigKey.Signal.Name + "\n");
+                        richTextBoxScript.Text += ("redrat " + sigKey.Signal.Name + " " + Convert.ToInt32(sw.Elapsed.TotalMilliseconds) + "\n");
+                        sw.Restart();
                         richTextBoxScript.SelectionStart = richTextBoxScript.TextLength;
                         // Scrolls the contents of the control to the current caret position.
                         richTextBoxScript.ScrollToCaret();
@@ -115,7 +117,7 @@ namespace RCrecoder
             switch (siea.Action)
             {
                 case SignalEventAction.EXCEPTION:
-                    MessageBox.Show(siea.Exception.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                    //MessageBox.Show(siea.Exception.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                     break;
 
                 case SignalEventAction.MODULATED_SIGNAL:
@@ -177,17 +179,18 @@ namespace RCrecoder
 
         private void RecorderendButton1_Click(object sender, EventArgs e)
         {
+            sw.Stop();
             this.Text = "Finish !";
             if (redRat3 != null && redRat3.IsConnected())
             redRat3.Disconnect();
             SaveFileDialog dlg = new SaveFileDialog();
-            dlg.Title = "Save an macro File";
+            dlg.Title = "Save an script File";
             if (dlg.ShowDialog() == System.Windows.Forms.DialogResult.OK && dlg.FileName != "")
             {
                 if(File.Exists(dlg.FileName))
-                RCscript = new StreamWriter(dlg.FileName , true, System.Text.Encoding.Default);
+                RCscript = new StreamWriter(dlg.FileName , false, System.Text.Encoding.Default);
                 else
-                RCscript = new StreamWriter(dlg.FileName + (".rcmacro"), true, System.Text.Encoding.Default);
+                RCscript = new StreamWriter(dlg.FileName + (".tpvts"), false, System.Text.Encoding.Default);
                 RCscript.Write(richTextBoxScript.Text);
                 RCscript.Close();
             }
@@ -290,7 +293,7 @@ namespace RCrecoder
 
             var openFileDialog = new OpenFileDialog
             {
-                Filter = "rcmacro files (*.rcmacro)|*.rcmacro|All files (*.*)|*.*",
+                Filter = "tpvts files (*.tpvts)|*.tpvts|rcmacro files (*.rcmacro)|*.rcmacro|All files (*.*)|*.*",
                 RestoreDirectory = true
             };
 
@@ -306,6 +309,29 @@ namespace RCrecoder
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+            }
+        }
+
+        private void createmacroFlatButton1_Click(object sender, EventArgs e)
+        {
+            if (redRat3 != null && redRat3.IsConnected())
+                redRat3.Disconnect();
+            SaveFileDialog dlg = new SaveFileDialog();
+            dlg.Title = "Save an macro File";
+            if (dlg.ShowDialog() == System.Windows.Forms.DialogResult.OK && dlg.FileName != "")
+            {
+                if (File.Exists(dlg.FileName))
+                    RCscript = new StreamWriter(dlg.FileName, false, System.Text.Encoding.Default);
+                else
+                    RCscript = new StreamWriter(dlg.FileName + (".rcmacro"), false, System.Text.Encoding.Default);
+                string[] macrotext = richTextBoxScript.Text.Split('\n');
+                string[] macro_comment;
+                for (int i = 0; i < macrotext.Length - 1; i++)
+                {
+                    macro_comment = macrotext[i].Split(' ');
+                    RCscript.Write(macro_comment[1] + '\n');
+                }
+                RCscript.Close();
             }
         }
     }

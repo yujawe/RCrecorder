@@ -35,6 +35,7 @@
             this.richTextBoxLineNumber = new System.Windows.Forms.RichTextBox();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.loadmacroFlatButton = new MaterialSkin.Controls.MaterialFlatButton();
+            this.createmacroFlatButton1 = new MaterialSkin.Controls.MaterialFlatButton();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -103,7 +104,7 @@
             this.richTextBoxScript.ForeColor = System.Drawing.Color.Lime;
             this.richTextBoxScript.Location = new System.Drawing.Point(0, 0);
             this.richTextBoxScript.Name = "richTextBoxScript";
-            this.richTextBoxScript.Size = new System.Drawing.Size(243, 364);
+            this.richTextBoxScript.Size = new System.Drawing.Size(359, 364);
             this.richTextBoxScript.TabIndex = 5;
             this.richTextBoxScript.Text = "";
             this.richTextBoxScript.SelectionChanged += new System.EventHandler(this.richTextBoxScript_SelectionChanged);
@@ -119,7 +120,7 @@
             this.richTextBoxLineNumber.Location = new System.Drawing.Point(0, 0);
             this.richTextBoxLineNumber.Name = "richTextBoxLineNumber";
             this.richTextBoxLineNumber.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.None;
-            this.richTextBoxLineNumber.Size = new System.Drawing.Size(83, 364);
+            this.richTextBoxLineNumber.Size = new System.Drawing.Size(87, 364);
             this.richTextBoxLineNumber.TabIndex = 6;
             this.richTextBoxLineNumber.Text = "";
             // 
@@ -136,8 +137,8 @@
             // splitContainer1.Panel2
             // 
             this.splitContainer1.Panel2.Controls.Add(this.richTextBoxScript);
-            this.splitContainer1.Size = new System.Drawing.Size(330, 364);
-            this.splitContainer1.SplitterDistance = 83;
+            this.splitContainer1.Size = new System.Drawing.Size(450, 364);
+            this.splitContainer1.SplitterDistance = 87;
             this.splitContainer1.TabIndex = 7;
             // 
             // loadmacroFlatButton
@@ -150,18 +151,35 @@
             this.loadmacroFlatButton.MouseState = MaterialSkin.MouseState.HOVER;
             this.loadmacroFlatButton.Name = "loadmacroFlatButton";
             this.loadmacroFlatButton.Primary = false;
-            this.loadmacroFlatButton.Size = new System.Drawing.Size(144, 36);
+            this.loadmacroFlatButton.Size = new System.Drawing.Size(142, 36);
             this.loadmacroFlatButton.TabIndex = 8;
-            this.loadmacroFlatButton.Text = "LOAD MACRO";
+            this.loadmacroFlatButton.Text = "LOAD SCRIPT";
             this.loadmacroFlatButton.UseVisualStyleBackColor = true;
             this.loadmacroFlatButton.Click += new System.EventHandler(this.loadmacroFlatButton_Click);
+            // 
+            // createmacroFlatButton1
+            // 
+            this.createmacroFlatButton1.AutoSize = true;
+            this.createmacroFlatButton1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.createmacroFlatButton1.Depth = 0;
+            this.createmacroFlatButton1.Location = new System.Drawing.Point(13, 405);
+            this.createmacroFlatButton1.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            this.createmacroFlatButton1.MouseState = MaterialSkin.MouseState.HOVER;
+            this.createmacroFlatButton1.Name = "createmacroFlatButton1";
+            this.createmacroFlatButton1.Primary = false;
+            this.createmacroFlatButton1.Size = new System.Drawing.Size(143, 36);
+            this.createmacroFlatButton1.TabIndex = 9;
+            this.createmacroFlatButton1.Text = "MACRO SAVE";
+            this.createmacroFlatButton1.UseVisualStyleBackColor = true;
+            this.createmacroFlatButton1.Click += new System.EventHandler(this.createmacroFlatButton1_Click);
             // 
             // RCrecorderForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 18F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
-            this.ClientSize = new System.Drawing.Size(680, 486);
+            this.ClientSize = new System.Drawing.Size(800, 486);
+            this.Controls.Add(this.createmacroFlatButton1);
             this.Controls.Add(this.loadmacroFlatButton);
             this.Controls.Add(this.splitContainer1);
             this.Controls.Add(this.RecorderendButton1);
@@ -188,6 +206,7 @@
         private System.Windows.Forms.RichTextBox richTextBoxLineNumber;
         private System.Windows.Forms.SplitContainer splitContainer1;
         private MaterialSkin.Controls.MaterialFlatButton loadmacroFlatButton;
+        private MaterialSkin.Controls.MaterialFlatButton createmacroFlatButton1;
     }
 }
 
