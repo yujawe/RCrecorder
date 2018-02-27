@@ -84,7 +84,6 @@
             this.RecorderendButton1.AutoSize = true;
             this.RecorderendButton1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.RecorderendButton1.Depth = 0;
-            this.RecorderendButton1.Enabled = false;
             this.RecorderendButton1.Location = new System.Drawing.Point(13, 347);
             this.RecorderendButton1.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
             this.RecorderendButton1.MouseState = MaterialSkin.MouseState.HOVER;
@@ -104,7 +103,7 @@
             this.richTextBoxScript.ForeColor = System.Drawing.Color.Lime;
             this.richTextBoxScript.Location = new System.Drawing.Point(0, 0);
             this.richTextBoxScript.Name = "richTextBoxScript";
-            this.richTextBoxScript.Size = new System.Drawing.Size(359, 364);
+            this.richTextBoxScript.Size = new System.Drawing.Size(576, 364);
             this.richTextBoxScript.TabIndex = 5;
             this.richTextBoxScript.Text = "";
             this.richTextBoxScript.SelectionChanged += new System.EventHandler(this.richTextBoxScript_SelectionChanged);
@@ -120,13 +119,13 @@
             this.richTextBoxLineNumber.Location = new System.Drawing.Point(0, 0);
             this.richTextBoxLineNumber.Name = "richTextBoxLineNumber";
             this.richTextBoxLineNumber.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.None;
-            this.richTextBoxLineNumber.Size = new System.Drawing.Size(87, 364);
+            this.richTextBoxLineNumber.Size = new System.Drawing.Size(138, 364);
             this.richTextBoxLineNumber.TabIndex = 6;
             this.richTextBoxLineNumber.Text = "";
             // 
             // splitContainer1
             // 
-            this.splitContainer1.Location = new System.Drawing.Point(338, 110);
+            this.splitContainer1.Location = new System.Drawing.Point(221, 110);
             this.splitContainer1.Name = "splitContainer1";
             // 
             // splitContainer1.Panel1
@@ -137,8 +136,8 @@
             // splitContainer1.Panel2
             // 
             this.splitContainer1.Panel2.Controls.Add(this.richTextBoxScript);
-            this.splitContainer1.Size = new System.Drawing.Size(450, 364);
-            this.splitContainer1.SplitterDistance = 87;
+            this.splitContainer1.Size = new System.Drawing.Size(718, 364);
+            this.splitContainer1.SplitterDistance = 138;
             this.splitContainer1.TabIndex = 7;
             // 
             // loadmacroFlatButton
@@ -178,7 +177,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 18F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
-            this.ClientSize = new System.Drawing.Size(800, 486);
+            this.ClientSize = new System.Drawing.Size(951, 486);
             this.Controls.Add(this.createmacroFlatButton1);
             this.Controls.Add(this.loadmacroFlatButton);
             this.Controls.Add(this.splitContainer1);

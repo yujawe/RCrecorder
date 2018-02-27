@@ -22,10 +22,10 @@ namespace RCrecoder
     {
         private AVDeviceDB avDeviceDB;
         protected IRedRat3 redRat3;
+        bool first_script;
         List<string> all_button_name = new List<string>();
         StreamWriter RCscript;
         System.Diagnostics.Stopwatch sw = new System.Diagnostics.Stopwatch();
-
         public RCrecorderForm()
         {
             InitializeComponent();
@@ -45,7 +45,7 @@ namespace RCrecoder
                 Filter = "XML files (*.xml)|*.xml|All files (*.*)|*.*",
                 RestoreDirectory = true
             };
-
+            string FW = redRat3.FirmwareVersion;
             if (openFileDialog.ShowDialog() != DialogResult.OK) return;
 
             var fName = openFileDialog.FileName;
@@ -73,10 +73,12 @@ namespace RCrecoder
             RecorderStartButton2.Enabled = true;
             richTextBoxScript.Clear();
             richTextBoxLineNumber.Clear();
+
         }
 
         private void RecorderStartButton2_Click(object sender, EventArgs e)
         {
+            first_script = true;
             RecorderStartButton2.Enabled = false;
             RecorderendButton1.Enabled = true;
             redRat3.RCDetectorEnabled = true;
@@ -95,7 +97,13 @@ namespace RCrecoder
                 {
                     BeginInvoke((MethodInvoker)delegate
                     {
-                        richTextBoxScript.Text += ("redrat " + sigKey.Signal.Name + " " + Convert.ToInt32(sw.Elapsed.TotalMilliseconds) + "\n");
+                        if (first_script)
+                        {
+                            richTextBoxScript.Text += ("redrat " + sigKey.Signal.Name + " ");
+                            first_script = false;
+                        }
+                        else
+                            richTextBoxScript.Text += (Convert.ToInt32(sw.Elapsed.TotalMilliseconds) + "\n" + "redrat " + sigKey.Signal.Name + " ");
                         sw.Restart();
                         richTextBoxScript.SelectionStart = richTextBoxScript.TextLength;
                         // Scrolls the contents of the control to the current caret position.
@@ -180,6 +188,10 @@ namespace RCrecoder
         private void RecorderendButton1_Click(object sender, EventArgs e)
         {
             sw.Stop();
+            BeginInvoke((MethodInvoker)delegate
+            {
+                richTextBoxScript.Text += (Convert.ToInt32(sw.Elapsed.TotalMilliseconds));
+            });
             this.Text = "Finish !";
             if (redRat3 != null && redRat3.IsConnected())
             redRat3.Disconnect();
@@ -194,7 +206,7 @@ namespace RCrecoder
                 RCscript.Write(richTextBoxScript.Text);
                 RCscript.Close();
             }
-            RecorderendButton1.Enabled = false;
+            if(avDeviceDB != null)
             RecorderStartButton2.Enabled = true;
         }
 
@@ -314,6 +326,7 @@ namespace RCrecoder
 
         private void createmacroFlatButton1_Click(object sender, EventArgs e)
         {
+            sw.Stop();
             if (redRat3 != null && redRat3.IsConnected())
                 redRat3.Disconnect();
             SaveFileDialog dlg = new SaveFileDialog();
@@ -333,6 +346,8 @@ namespace RCrecoder
                 }
                 RCscript.Close();
             }
+            if (avDeviceDB != null)
+            RecorderStartButton2.Enabled = true;
         }
     }
 }
