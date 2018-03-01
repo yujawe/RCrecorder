@@ -109,7 +109,7 @@ namespace RCrecoder
                         // Scrolls the contents of the control to the current caret position.
                         richTextBoxScript.ScrollToCaret();
                     });
-                    signal_receive_Delay(Convert.ToInt32(redRat3.EndOfSignalTimeout)); //防止接收重複信號
+                    signal_receive_Delay(50); //防止接收重複信號
                     redRat3.ClearRCSignalInQueue();
                 }
                 redRat3.RCDetectorEnabled = true;

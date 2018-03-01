@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(RCrecorderForm));
             this.LoadDBButton1 = new MaterialSkin.Controls.MaterialFlatButton();
             this.RecorderStartButton2 = new MaterialSkin.Controls.MaterialFlatButton();
             this.RecorderendButton1 = new MaterialSkin.Controls.MaterialFlatButton();
@@ -184,6 +185,7 @@
             this.Controls.Add(this.RecorderendButton1);
             this.Controls.Add(this.RecorderStartButton2);
             this.Controls.Add(this.LoadDBButton1);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "RCrecorderForm";
             this.Text = "RCrecoder";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.RCrecorderForm_FormClosing);
