@@ -20,6 +20,7 @@ namespace RCrecoder
 {
     public partial class RCrecorderForm : MaterialForm
     {
+        public static RCrecorderForm main_form = null;
         private AVDeviceDB avDeviceDB;
         protected IRedRat3 redRat3;
         bool first_script;
@@ -29,6 +30,7 @@ namespace RCrecoder
         public RCrecorderForm()
         {
             InitializeComponent();
+            main_form = this;
             OpenRedRat3();
             if (redRat3 != null)
             {
@@ -36,6 +38,7 @@ namespace RCrecoder
                 redRat3.RCDetectorSignalIn += RCSignalDataIn;
             }
         }
+
 
         private void LoadDBButton1_Click(object sender, EventArgs e)
         {
@@ -85,7 +88,6 @@ namespace RCrecoder
             redRat3.Connect();
             this.Text = "Recording.....";
             richTextBoxScript.Clear();
-            sw.Restart();
         }
         protected void signal_decode(SignalKey sigKey)
         {
@@ -97,8 +99,9 @@ namespace RCrecoder
                 {
                     BeginInvoke((MethodInvoker)delegate
                     {
-                        if (first_script)
+                        if (first_script || !sw.IsRunning)
                         {
+                            sw.Restart();
                             richTextBoxScript.Text += ("redrat " + sigKey.Signal.Name + " ");
                             first_script = false;
                         }
@@ -187,11 +190,14 @@ namespace RCrecoder
 
         private void RecorderendButton1_Click(object sender, EventArgs e)
         {
-            sw.Stop();
-            BeginInvoke((MethodInvoker)delegate
+            if (sw.IsRunning)
             {
-                richTextBoxScript.Text += (Convert.ToInt32(sw.Elapsed.TotalMilliseconds));
-            });
+                sw.Stop();
+                BeginInvoke((MethodInvoker)delegate
+                {
+                    richTextBoxScript.Text += (Convert.ToInt32(sw.Elapsed.TotalMilliseconds));
+                });
+            }
             this.Text = "Finish !";
             if (redRat3 != null && redRat3.IsConnected())
             redRat3.Disconnect();
@@ -348,6 +354,80 @@ namespace RCrecoder
             }
             if (avDeviceDB != null)
             RecorderStartButton2.Enabled = true;
+        }
+
+        private void RCrecorderForm_Load(object sender, EventArgs e)
+        {
+            if (redRat3 != null && redRat3.IsConnected())
+            redRat3.MinPauseSize = 10;
+        }
+
+        private void keypad_btn_Click(object sender, EventArgs e)
+        {
+            panel.Visible = true;
+            if (File.Exists("key.config"))
+            {
+                var key = File.ReadAllLines("key.config");
+                List<string> key_list = new List<string>(key);
+                keyload(key_list);
+            }
+        }
+
+        private void addkey_btn_Click(object sender, EventArgs e)
+        {
+               var keypad_list = new keypadlist();
+               keypad_list.Show();
+        }
+        public void keyload(List<string> key_list)
+        {
+            panel.Controls.Clear();
+            int btnwidth = 150;
+            int btnheight = 50;
+            for (int i = 0; i < key_list.Count; i++)
+            {
+                Button key_button = new Button();
+                key_button = new Button();
+                panel.Controls.Add(key_button);
+                key_button.Size = new Size(btnwidth,btnheight);
+                key_button.Location = new Point(0,key_button.Height*i);
+                key_button.Name = key_list[i]+"_btn";
+                key_button.Text = key_list[i];
+                key_button.Font = new Font(new FontFamily(key_button.Font.Name), 12, key_button.Font.Style);
+                key_button.Click += new EventHandler(btn_Click);
+            }
+
+        }
+        private void btn_Click(object sender, EventArgs e)
+        {
+            BeginInvoke((MethodInvoker)delegate
+            {
+                if (!sw.IsRunning)
+                {
+                    richTextBoxScript.Text += ((Button)sender).Text +  " " ;
+                    sw.Restart();
+                }
+                else
+                richTextBoxScript.Text += (Convert.ToInt32(sw.Elapsed.TotalMilliseconds) + "\n" + ((Button)sender).Text + " ");
+                sw.Restart();
+                richTextBoxScript.SelectionStart = richTextBoxScript.TextLength;
+                // Scrolls the contents of the control to the current caret position.
+                richTextBoxScript.ScrollToCaret();
+            });
+        }
+
+        private void newline_btn_Click(object sender, EventArgs e)
+        {
+            BeginInvoke((MethodInvoker)delegate
+            {
+                if (sw.IsRunning)
+                {
+                    richTextBoxScript.Text += (Convert.ToInt32(sw.Elapsed.TotalMilliseconds) + "\n#############################\n");
+                    sw.Reset();
+                    richTextBoxScript.SelectionStart = richTextBoxScript.TextLength;
+                    // Scrolls the contents of the control to the current caret position.
+                    richTextBoxScript.ScrollToCaret();
+                }
+            });
         }
     }
 }

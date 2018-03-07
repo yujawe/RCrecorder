@@ -68,6 +68,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="keypadlist.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="keypadlist.Designer.cs">
+      <DependentUpon>keypadlist.cs</DependentUpon>
+    </Compile>
     <Compile Include="RCrecorder.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -76,6 +82,9 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="keypadlist.resx">
+      <DependentUpon>keypadlist.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="RCrecorder.resx">
       <DependentUpon>RCrecorder.cs</DependentUpon>
     </EmbeddedResource>
