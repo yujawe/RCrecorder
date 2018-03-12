@@ -210,6 +210,7 @@
             // 
             this.keypad_btn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.keypad_btn.BackColor = System.Drawing.Color.White;
+            this.keypad_btn.Enabled = false;
             this.keypad_btn.Image = ((System.Drawing.Image)(resources.GetObject("keypad_btn.Image")));
             this.keypad_btn.Location = new System.Drawing.Point(549, 462);
             this.keypad_btn.Name = "keypad_btn";
@@ -222,6 +223,7 @@
             // 
             this.newline_btn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.newline_btn.BackColor = System.Drawing.Color.White;
+            this.newline_btn.Enabled = false;
             this.newline_btn.Image = ((System.Drawing.Image)(resources.GetObject("newline_btn.Image")));
             this.newline_btn.Location = new System.Drawing.Point(549, 386);
             this.newline_btn.Name = "newline_btn";

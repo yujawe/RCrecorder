@@ -23,7 +23,6 @@ namespace RCrecoder
         public static RCrecorderForm main_form = null;
         private AVDeviceDB avDeviceDB;
         protected IRedRat3 redRat3;
-        bool first_script;
         List<string> all_button_name = new List<string>();
         StreamWriter RCscript;
         System.Diagnostics.Stopwatch sw = new System.Diagnostics.Stopwatch();
@@ -81,7 +80,8 @@ namespace RCrecoder
 
         private void RecorderStartButton2_Click(object sender, EventArgs e)
         {
-            first_script = true;
+            newline_btn.Enabled = true;
+            keypad_btn.Enabled = true;
             RecorderStartButton2.Enabled = false;
             RecorderendButton1.Enabled = true;
             redRat3.RCDetectorEnabled = true;
@@ -99,11 +99,10 @@ namespace RCrecoder
                 {
                     BeginInvoke((MethodInvoker)delegate
                     {
-                        if (first_script || !sw.IsRunning)
+                        if (richTextBoxScript.Lines.Length<1 || !sw.IsRunning)
                         {
                             sw.Restart();
                             richTextBoxScript.Text += ("redrat " + sigKey.Signal.Name + " ");
-                            first_script = false;
                         }
                         else
                             richTextBoxScript.Text += (Convert.ToInt32(sw.Elapsed.TotalMilliseconds) + "\n" + "redrat " + sigKey.Signal.Name + " ");
@@ -375,8 +374,11 @@ namespace RCrecoder
 
         private void addkey_btn_Click(object sender, EventArgs e)
         {
-               var keypad_list = new keypadlist();
-               keypad_list.Show();
+            if (keypad_btn.Enabled)
+            {
+                var keypad_list = new keypadlist();
+                keypad_list.Show();
+            }
         }
         public void keyload(List<string> key_list)
         {
@@ -392,27 +394,30 @@ namespace RCrecoder
                 key_button.Location = new Point(0,key_button.Height*i);
                 key_button.Name = key_list[i]+"_btn";
                 key_button.Text = key_list[i];
-                key_button.Font = new Font(new FontFamily(key_button.Font.Name), 12, key_button.Font.Style);
+                key_button.Font = new Font("Times New Roman", 12, key_button.Font.Style);
                 key_button.Click += new EventHandler(btn_Click);
             }
 
         }
         private void btn_Click(object sender, EventArgs e)
         {
-            BeginInvoke((MethodInvoker)delegate
+            if (keypad_btn.Enabled)
             {
-                if (!sw.IsRunning)
+                BeginInvoke((MethodInvoker)delegate
                 {
-                    richTextBoxScript.Text += ((Button)sender).Text +  " " ;
+                    if (!sw.IsRunning)
+                    {
+                        richTextBoxScript.Text += ((Button)sender).Text + " ";
+                        sw.Restart();
+                    }
+                    else
+                        richTextBoxScript.Text += (Convert.ToInt32(sw.Elapsed.TotalMilliseconds) + "\n" + ((Button)sender).Text + " ");
                     sw.Restart();
-                }
-                else
-                richTextBoxScript.Text += (Convert.ToInt32(sw.Elapsed.TotalMilliseconds) + "\n" + ((Button)sender).Text + " ");
-                sw.Restart();
-                richTextBoxScript.SelectionStart = richTextBoxScript.TextLength;
+                    richTextBoxScript.SelectionStart = richTextBoxScript.TextLength;
                 // Scrolls the contents of the control to the current caret position.
                 richTextBoxScript.ScrollToCaret();
-            });
+                });
+            }
         }
 
         private void newline_btn_Click(object sender, EventArgs e)
