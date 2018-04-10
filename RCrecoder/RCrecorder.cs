@@ -332,6 +332,7 @@ namespace RCrecoder
         private void createmacroFlatButton1_Click(object sender, EventArgs e)
         {
             sw.Stop();
+            richTextBoxScript.Text += (Convert.ToInt32(sw.Elapsed.TotalMilliseconds));
             if (redRat3 != null && redRat3.IsConnected())
                 redRat3.Disconnect();
             SaveFileDialog dlg = new SaveFileDialog();
@@ -343,12 +344,8 @@ namespace RCrecoder
                 else
                     RCscript = new StreamWriter(dlg.FileName + (".rcmacro"), false, System.Text.Encoding.Default);
                 string[] macrotext = richTextBoxScript.Text.Split('\n');
-                string[] macro_comment;
                 for (int i = 0; i < macrotext.Length - 1; i++)
-                {
-                    macro_comment = macrotext[i].Split(' ');
-                    RCscript.Write(macro_comment[1] + '\n');
-                }
+                RCscript.Write(macrotext[i] + '\n');
                 RCscript.Close();
             }
             if (avDeviceDB != null)
