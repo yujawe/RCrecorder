@@ -13,19 +13,25 @@ using RedRat;
 using RedRat.RedRat3;
 using RedRat.RedRat3.USB;
 using RedRat.AVDeviceMngmt;
+using System.Media;
+
 
 
 
 namespace RCrecoder
 {
     public partial class RCrecorderForm : MaterialForm
-    {
+    {   
         public static RCrecorderForm main_form = null;
         private AVDeviceDB avDeviceDB;
         protected IRedRat3 redRat3;
         List<string> all_button_name = new List<string>();
         StreamWriter RCscript;
         System.Diagnostics.Stopwatch sw = new System.Diagnostics.Stopwatch();
+
+        SoundPlayer decision_sound = new SoundPlayer(Path.Combine(Directory.GetCurrentDirectory() + "\\decision.wav"));
+        SoundPlayer error_sound = new SoundPlayer(Path.Combine(Directory.GetCurrentDirectory() + "\\warning.wav"));
+
         public RCrecorderForm()
         {
             InitializeComponent();
@@ -99,7 +105,7 @@ namespace RCrecoder
                 {
                     BeginInvoke((MethodInvoker)delegate
                     {
-                        if (richTextBoxScript.Lines.Length<1 || !sw.IsRunning)
+                        if (richTextBoxScript.Lines.Length < 1 || !sw.IsRunning)
                         {
                             sw.Restart();
                             richTextBoxScript.Text += ("redrat " + sigKey.Signal.Name + " ");
@@ -111,10 +117,11 @@ namespace RCrecoder
                         // Scrolls the contents of the control to the current caret position.
                         richTextBoxScript.ScrollToCaret();
                     });
-                    signal_receive_Delay(50); //防止接收重複信號
+                    decision_sound.Play();
+                    signal_receive_Delay(50); //防止接收重複信號   
                     redRat3.ClearRCSignalInQueue();
+                    redRat3.RCDetectorEnabled = true;
                 }
-                redRat3.RCDetectorEnabled = true;
             }
         }
 
@@ -332,24 +339,48 @@ namespace RCrecoder
         private void createmacroFlatButton1_Click(object sender, EventArgs e)
         {
             sw.Stop();
+            int RY = richTextBoxScript.GetLineFromCharIndex(richTextBoxScript.SelectionStart);
+            int RX = richTextBoxScript.SelectionStart - richTextBoxScript.GetFirstCharIndexFromLine(RY);
+            if (RX != 0)
             richTextBoxScript.Text += (Convert.ToInt32(sw.Elapsed.TotalMilliseconds));
-            if (redRat3 != null && redRat3.IsConnected())
-                redRat3.Disconnect();
-            SaveFileDialog dlg = new SaveFileDialog();
-            dlg.Title = "Save an macro File";
-            if (dlg.ShowDialog() == System.Windows.Forms.DialogResult.OK && dlg.FileName != "")
+            bool only_redrat_script = true;
+            string[] macrotext = richTextBoxScript.Text.Trim().Split('\n');
+            for (int i = 0; i<macrotext.Length;i++)
             {
-                if (File.Exists(dlg.FileName))
-                    RCscript = new StreamWriter(dlg.FileName, false, System.Text.Encoding.Default);
-                else
-                    RCscript = new StreamWriter(dlg.FileName + (".rcmacro"), false, System.Text.Encoding.Default);
-                string[] macrotext = richTextBoxScript.Text.Split('\n');
-                for (int i = 0; i < macrotext.Length - 1; i++)
-                RCscript.Write(macrotext[i] + '\n');
-                RCscript.Close();
+                string[] _macro_comment;
+                _macro_comment = macrotext[i].Split(' ');
+                if (_macro_comment[0] != "redrat")
+                {
+                    only_redrat_script = false;
+                    break;
+                }
+                only_redrat_script = true;
             }
-            if (avDeviceDB != null)
-            RecorderStartButton2.Enabled = true;
+            if (only_redrat_script)
+            {
+                if (redRat3 != null && redRat3.IsConnected())
+                    redRat3.Disconnect();
+                SaveFileDialog dlg = new SaveFileDialog();
+                dlg.Title = "Save an macro File";
+                if (dlg.ShowDialog() == System.Windows.Forms.DialogResult.OK && dlg.FileName != "")
+                {
+                    if (File.Exists(dlg.FileName))
+                        RCscript = new StreamWriter(dlg.FileName, false, System.Text.Encoding.Default);
+                    else
+                        RCscript = new StreamWriter(dlg.FileName + (".rcmacro"), false, System.Text.Encoding.Default);
+                    string[] macro_comment;
+                    for (int i = 0; i < macrotext.Length - 1; i++)
+                    {
+                        macro_comment = macrotext[i].Split(' ');
+                        RCscript.Write(macro_comment[1] + ' ' + macro_comment[2] + '\n');
+                    }
+                    RCscript.Close();
+                }
+                if (avDeviceDB != null)
+                    RecorderStartButton2.Enabled = true;
+            }
+            else
+                MessageBox.Show("Macro contains other commands (only accept redrat)!");
         }
 
         private void RCrecorderForm_Load(object sender, EventArgs e)
@@ -396,12 +427,14 @@ namespace RCrecoder
             }
 
         }
+
         private void btn_Click(object sender, EventArgs e)
         {
             if (keypad_btn.Enabled)
             {
                 BeginInvoke((MethodInvoker)delegate
                 {
+                    decision_sound.Play();
                     if (!sw.IsRunning)
                     {
                         richTextBoxScript.Text += ((Button)sender).Text + " ";
@@ -430,6 +463,22 @@ namespace RCrecoder
                     richTextBoxScript.ScrollToCaret();
                 }
             });
+        }
+
+        private void richTextBoxScript_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            int RY = richTextBoxScript.GetLineFromCharIndex(richTextBoxScript.SelectionStart);
+            int RX = richTextBoxScript.SelectionStart - richTextBoxScript.GetFirstCharIndexFromLine(RY) ;
+            if (RX == 0)
+                sw.Reset();
+        }
+
+        private void richTextBoxScript_MouseClick(object sender, MouseEventArgs e)
+        {
+            int RY = richTextBoxScript.GetLineFromCharIndex(richTextBoxScript.SelectionStart);
+            int RX = richTextBoxScript.SelectionStart - richTextBoxScript.GetFirstCharIndexFromLine(RY);
+            if (RX == 0)
+                sw.Reset();
         }
     }
 }
