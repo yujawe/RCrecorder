@@ -14,6 +14,9 @@ using RedRat.RedRat3;
 using RedRat.RedRat3.USB;
 using RedRat.AVDeviceMngmt;
 using System.Media;
+using System.Reflection;
+using System.Diagnostics;
+
 
 
 
@@ -24,17 +27,34 @@ namespace RCrecoder
     {   
         public static RCrecorderForm main_form = null;
         private AVDeviceDB avDeviceDB;
-        protected IRedRat3 redRat3;
+        public static IRedRat3 redRat3;
         List<string> all_button_name = new List<string>();
         StreamWriter RCscript;
         System.Diagnostics.Stopwatch sw = new System.Diagnostics.Stopwatch();
 
         SoundPlayer decision_sound = new SoundPlayer(Path.Combine(Directory.GetCurrentDirectory() + "\\decision.wav"));
         SoundPlayer error_sound = new SoundPlayer(Path.Combine(Directory.GetCurrentDirectory() + "\\warning.wav"));
+        private PropertyInfo _PropertyInfo = null;
 
         public RCrecorderForm()
         {
             InitializeComponent();
+            this.DoubleBuffered = true;
+            this.SetStyle(
+                        ControlStyles.UserPaint |
+                        ControlStyles.AllPaintingInWmPaint |
+                        ControlStyles.DoubleBuffer, true);
+
+            this._PropertyInfo = this.GetType().GetProperty("DoubleBuffered", BindingFlags.Instance | BindingFlags.NonPublic);
+            foreach (Control rootCtrl in this.Controls)
+            {
+                this._PropertyInfo.SetValue(rootCtrl, true, null);
+
+                if (rootCtrl.HasChildren)
+                    SearchControl(rootCtrl);
+            }
+
+
             main_form = this;
             OpenRedRat3();
             if (redRat3 != null)
@@ -43,6 +63,20 @@ namespace RCrecoder
                 redRat3.RCDetectorSignalIn += RCSignalDataIn;
             }
         }
+
+        private void SearchControl(Control Ctrl)
+        {
+            foreach (Control rootCtrl in Ctrl.Controls)
+            {
+                Debug.WriteLine(rootCtrl.Name + " 建立DoubleBuffer");
+                this._PropertyInfo.SetValue(rootCtrl, true, null);
+                if (rootCtrl.HasChildren)
+                    SearchControl(rootCtrl);
+                else
+                    break;
+            }
+        }
+
 
 
         private void LoadDBButton1_Click(object sender, EventArgs e)
@@ -479,6 +513,12 @@ namespace RCrecoder
             int RX = richTextBoxScript.SelectionStart - richTextBoxScript.GetFirstCharIndexFromLine(RY);
             if (RX == 0)
                 sw.Reset();
+        }
+
+        private void setting_btn_Click(object sender, EventArgs e)
+        {
+            var setting = new setting();
+            setting.Show();
         }
     }
 }

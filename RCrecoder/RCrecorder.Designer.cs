@@ -243,6 +243,7 @@
             this.setting_btn.Size = new System.Drawing.Size(61, 79);
             this.setting_btn.TabIndex = 14;
             this.setting_btn.UseVisualStyleBackColor = false;
+            this.setting_btn.Click += new System.EventHandler(this.setting_btn_Click);
             // 
             // RCrecorderForm
             // 

@@ -181,6 +181,7 @@
             this.ok_button.TabIndex = 1;
             this.ok_button.Text = "OK";
             this.ok_button.UseVisualStyleBackColor = true;
+            this.ok_button.Click += new System.EventHandler(this.ok_button_Click);
             // 
             // cancel_button
             // 
@@ -190,6 +191,7 @@
             this.cancel_button.TabIndex = 2;
             this.cancel_button.Text = "Cancel";
             this.cancel_button.UseVisualStyleBackColor = true;
+            this.cancel_button.Click += new System.EventHandler(this.cancel_button_Click);
             // 
             // max_num_len_textBox
             // 
@@ -257,6 +259,7 @@
             this.Controls.Add(this.setting_panel);
             this.Name = "setting";
             this.Text = "Paramater Setting";
+            this.Load += new System.EventHandler(this.setting_Load);
             this.setting_panel.ResumeLayout(false);
             this.setting_tableLayoutPanel.ResumeLayout(false);
             this.setting_tableLayoutPanel.PerformLayout();
