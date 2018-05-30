@@ -41,6 +41,7 @@
             this.addkey_btn = new MaterialSkin.Controls.MaterialRaisedButton();
             this.keypad_btn = new System.Windows.Forms.Button();
             this.newline_btn = new System.Windows.Forms.Button();
+            this.setting_btn = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -232,6 +233,17 @@
             this.newline_btn.UseVisualStyleBackColor = false;
             this.newline_btn.Click += new System.EventHandler(this.newline_btn_Click);
             // 
+            // setting_btn
+            // 
+            this.setting_btn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.setting_btn.BackColor = System.Drawing.Color.White;
+            this.setting_btn.Image = ((System.Drawing.Image)(resources.GetObject("setting_btn.Image")));
+            this.setting_btn.Location = new System.Drawing.Point(549, 301);
+            this.setting_btn.Name = "setting_btn";
+            this.setting_btn.Size = new System.Drawing.Size(61, 79);
+            this.setting_btn.TabIndex = 14;
+            this.setting_btn.UseVisualStyleBackColor = false;
+            // 
             // RCrecorderForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 18F);
@@ -239,6 +251,7 @@
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
             this.ClientSize = new System.Drawing.Size(1068, 548);
+            this.Controls.Add(this.setting_btn);
             this.Controls.Add(this.newline_btn);
             this.Controls.Add(this.addkey_btn);
             this.Controls.Add(this.keypad_btn);
@@ -277,6 +290,7 @@
         private System.Windows.Forms.Button keypad_btn;
         private MaterialSkin.Controls.MaterialRaisedButton addkey_btn;
         private System.Windows.Forms.Button newline_btn;
+        private System.Windows.Forms.Button setting_btn;
     }
 }
 
