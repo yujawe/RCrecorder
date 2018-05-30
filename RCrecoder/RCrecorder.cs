@@ -238,6 +238,7 @@ namespace RCrecoder
                     richTextBoxScript.Text += (Convert.ToInt32(sw.Elapsed.TotalMilliseconds));
                 });
             }
+            redRat3.RCDetectorEnabled = false;
             this.Text = "Finish !";
             if (redRat3 != null && redRat3.IsConnected())
             redRat3.Disconnect();
@@ -373,6 +374,7 @@ namespace RCrecoder
         private void createmacroFlatButton1_Click(object sender, EventArgs e)
         {
             sw.Stop();
+            redRat3.RCDetectorEnabled = false;
             int RY = richTextBoxScript.GetLineFromCharIndex(richTextBoxScript.SelectionStart);
             int RX = richTextBoxScript.SelectionStart - richTextBoxScript.GetFirstCharIndexFromLine(RY);
             if (RX != 0)
