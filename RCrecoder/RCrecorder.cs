@@ -118,7 +118,7 @@ namespace RCrecoder
                         richTextBoxScript.ScrollToCaret();
                     });
                     decision_sound.Play();
-                    signal_receive_Delay(50); //防止接收重複信號   
+                    signal_receive_Delay(150); //防止接收重複信號   
                     redRat3.ClearRCSignalInQueue();
                     redRat3.RCDetectorEnabled = true;
                 }
@@ -369,7 +369,7 @@ namespace RCrecoder
                     else
                         RCscript = new StreamWriter(dlg.FileName + (".rcmacro"), false, System.Text.Encoding.Default);
                     string[] macro_comment;
-                    for (int i = 0; i < macrotext.Length - 1; i++)
+                    for (int i = 0; i < macrotext.Length; i++)
                     {
                         macro_comment = macrotext[i].Split(' ');
                         RCscript.Write(macro_comment[1] + ' ' + macro_comment[2] + '\n');
