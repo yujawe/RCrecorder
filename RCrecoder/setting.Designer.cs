@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(setting));
             this.setting_panel = new System.Windows.Forms.Panel();
             this.setting_tableLayoutPanel = new System.Windows.Forms.TableLayoutPanel();
             this.max_num_len_label = new System.Windows.Forms.Label();
@@ -257,6 +258,8 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(519, 401);
             this.Controls.Add(this.setting_panel);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "setting";
             this.Text = "Paramater Setting";
             this.Load += new System.EventHandler(this.setting_Load);
