@@ -22,6 +22,7 @@ namespace RCrecoder
         private void keyadd_btn_Click(object sender, EventArgs e)
         {
             key_listbox.Items.Add(addkey_text.Text);
+            addkey_text.Clear();
             key_listbox.SelectionMode = SelectionMode.MultiExtended;
         }
 

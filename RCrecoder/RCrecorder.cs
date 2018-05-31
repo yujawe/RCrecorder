@@ -412,11 +412,11 @@ namespace RCrecoder
                     }
                     RCscript.Close();
                 }
-                if (avDeviceDB != null)
-                    RecorderStartButton2.Enabled = true;
             }
             else
                 MessageBox.Show("Macro contains other commands (only accept redrat)!");
+            if (avDeviceDB != null)
+                RecorderStartButton2.Enabled = true;
         }
 
         private void RCrecorderForm_Load(object sender, EventArgs e)
@@ -519,8 +519,11 @@ namespace RCrecoder
 
         private void setting_btn_Click(object sender, EventArgs e)
         {
-            var setting = new setting();
-            setting.Show();
+            if (redRat3 != null)
+            {
+                var setting = new setting();
+                setting.Show();
+            }
         }
     }
 }

@@ -20,13 +20,13 @@ namespace RCrecoder
 
         private void setting_Load(object sender, EventArgs e)
         {
-            max_num_len_textBox.Text  = Convert.ToString(RCrecorderForm.redRat3.MaxNumLengths);
-            sig_mem_size_textBox.Text = Convert.ToString(RCrecorderForm.redRat3.SignalMemorySize);
-            peri_count_textBox.Text   = Convert.ToString(RCrecorderForm.redRat3.ModFreqPeriodsToMeasure);
-            len_delta_textBox.Text    = Convert.ToString(RCrecorderForm.redRat3.LengthMeasurementDelta);
-            sig_timeout_textBox.Text  = Convert.ToString(RCrecorderForm.redRat3.EndOfSignalTimeout);
-            mini_pause_textBox.Text   = Convert.ToString(RCrecorderForm.redRat3.MinPauseSize);
-            hsc_checkBox.Checked      = RCrecorderForm.redRat3.HiSpeedMode;
+                max_num_len_textBox.Text = Convert.ToString(RCrecorderForm.redRat3.MaxNumLengths);
+                sig_mem_size_textBox.Text = Convert.ToString(RCrecorderForm.redRat3.SignalMemorySize);
+                peri_count_textBox.Text = Convert.ToString(RCrecorderForm.redRat3.ModFreqPeriodsToMeasure);
+                len_delta_textBox.Text = Convert.ToString(RCrecorderForm.redRat3.LengthMeasurementDelta);
+                sig_timeout_textBox.Text = Convert.ToString(RCrecorderForm.redRat3.EndOfSignalTimeout);
+                mini_pause_textBox.Text = Convert.ToString(RCrecorderForm.redRat3.MinPauseSize);
+                hsc_checkBox.Checked = RCrecorderForm.redRat3.HiSpeedMode;
         }
 
         private void cancel_button_Click(object sender, EventArgs e)
