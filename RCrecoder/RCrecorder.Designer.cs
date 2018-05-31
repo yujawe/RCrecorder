@@ -265,7 +265,7 @@
             this.Controls.Add(this.LoadDBButton1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "RCrecorderForm";
-            this.Text = "RCrecoder v1.2";
+            this.Text = "RCrecoder v1.3";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.RCrecorderForm_FormClosing);
             this.Load += new System.EventHandler(this.RCrecorderForm_Load);
             this.splitContainer1.Panel1.ResumeLayout(false);
